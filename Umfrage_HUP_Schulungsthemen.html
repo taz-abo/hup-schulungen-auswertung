@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HUP Schulungsthemen – Vollständige Auswertung</title>
+<style>
+  :root {
+    --red: #e0001b;
+    --black: #111111;
+    --white: #ffffff;
+    --rule-light: #d8d8d8;
+    --gray-text: #333333;
+    --gray-muted: #888;
+    
+    /* Schrifteinstellungen */
+    --font-header: 'Aktiv Grotesk', 'AktivGrotesk_Rg', sans-serif;
+    --font-body: 'QuaText', 'QuaText-Regular', Georgia, serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  
+  body { 
+    background: var(--white); 
+    color: var(--black); 
+    font-family: var(--font-body); 
+    font-size: 17px; 
+    line-height: 1.6; 
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Navigation & Header (Aktiv Grotesk) */
+  .topnav { background: var(--red); padding: 10px 0; }
+  .topnav-inner { max-width: 900px; margin: 0 auto; padding: 0 30px; display: flex; align-items: center; }
+  .topnav-crumb { 
+    font-family: var(--font-header); font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.9); 
+    text-transform: uppercase; letter-spacing: 0.1em; 
+  }
+
+  .site-header { border-bottom: 3px solid var(--black); margin-bottom: 60px; }
+  .header-inner { max-width: 900px; margin: 0 auto; padding: 40px 30px 0; }
+  
+  .kicker { 
+    font-family: var(--font-header); font-size: 12px; font-weight: 800; letter-spacing: 0.12em; 
+    text-transform: uppercase; color: var(--red); margin-bottom: 12px; 
+  }
+  
+  h1 { 
+    font-family: var(--font-header); font-weight: 900; font-size: clamp(30px, 5vw, 48px); 
+    line-height: 1.05; color: var(--black); margin-bottom: 24px; letter-spacing: -0.03em;
+  }
+
+  .header-meta { 
+    font-family: var(--font-header); display: flex; border-top: 1px solid var(--rule-light); 
+    padding: 16px 0; font-size: 13px; color: var(--gray-muted); font-weight: 600;
+  }
+  .header-meta-item { margin-right: 20px; padding-right: 20px; border-right: 1px solid var(--rule-light); }
+  .header-meta-item:last-child { border-right: none; }
+
+  /* Content */
+  .main { max-width: 900px; margin: 0 auto; padding: 0 30px 100px; }
+
+  .q-block { margin-top: 64px; border-top: 3px solid var(--black); padding-top: 24px; }
+  .q-meta { 
+    font-family: var(--font-header); font-size: 11px; letter-spacing: 0.12em; 
+    text-transform: uppercase; color: var(--red); margin-bottom: 10px; font-weight: 800; 
+  }
+  
+  .q-title { 
+    font-family: var(--font-header); font-weight: 700; font-size: clamp(20px, 3vw, 26px); 
+    line-height: 1.3; color: var(--black); margin-bottom: 32px; 
+  }
+
+  /* Cluster Design */
+  .cluster { display: grid; grid-template-columns: 80px 1fr; border-top: 1px solid var(--rule-light); padding: 24px 0; }
+  .cluster:last-of-type { border-bottom: 1px solid var(--rule-light); }
+  
+  .c-count { padding-right: 20px; border-right: 1px solid var(--rule-light); text-align: right; }
+  .c-n { font-family: var(--font-header); font-weight: 900; font-size: 34px; line-height: 1; color: var(--black); display: block; }
+  .c-n-sub { font-family: var(--font-header); font-size: 10px; color: var(--gray-muted); display: block; margin-top: 4px; font-weight: 700; text-transform: uppercase; }
+  
+  .cluster.lead .c-n { color: var(--red); }
+  .cluster.lead .c-title { color: var(--red); }
+  
+  .c-body { padding-left: 24px; }
+  .c-title { font-family: var(--font-header); font-weight: 700; font-size: 17px; color: var(--black); margin-bottom: 14px; line-height: 1.4; }
+  
+  .quotes { display: flex; flex-direction: column; gap: 12px; }
+  .quote { font-family: var(--font-body); font-size: 16px; font-style: italic; color: var(--gray-text); line-height: 1.6; padding-left: 18px; border-left: 3px solid var(--rule-light); }
+  .cluster.lead .quote { border-left-color: var(--red); }
+
+  /* Tally (Frage 9) */
+  .tally { display: flex; flex-wrap: wrap; margin-top: 24px; border: 2px solid var(--black); }
+  .tally-item { flex: 1; min-width: 200px; padding: 24px; border-right: 1px solid var(--black); }
+  .tally-item:last-child { border-right: none; }
+  .tally-item.winner { background: var(--red); color: var(--white); border-right-color: var(--white); }
+  .tally-num { font-family: var(--font-header); font-weight: 900; font-size: 48px; line-height: 1; display: block; }
+  .tally-label { font-family: var(--font-header); font-size: 14px; font-weight: 700; display: block; margin-top: 10px; }
+
+  @media (max-width: 600px) {
+    .cluster { grid-template-columns: 60px 1fr; }
+    .c-n { font-size: 26px; }
+    .tally-item { border-right: none; border-bottom: 1px solid var(--black); }
+  }
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <div class="topnav-inner">
+  </div>
+</div>
+
+<div class="site-header">
+  <div class="header-inner">
+    <div class="kicker">Survey-Auswertung</div>
+    <h1>HUP Schulungsthemen: Ergebnisse</h1>
+    <div class="header-meta">
+      <div class="header-meta-item">April 2026</div>
+      <div class="header-meta-item">6 Teilnehmende – Einzelpersonen und Teams</div>
+      <div class="header-meta-item">Antworten geclustered und absteigend nach Häufigkeit sortiert</div>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+
+  <div class="q-block">
+    <div class="q-meta">Frage 1 von 10</div>
+    <div class="q-title">Welche 2–3 Arbeitsabläufe fühlen sich für dich am zähesten an?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">5</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Buchhaltung, Rechnungen &amp; OP/AP-Auskunft</div>
+        <div class="quotes">
+          <div class="quote">„Buchhaltung, Fakturationen – Rechnungen in der Ansicht F9 oder in der OP/AP Auskunft schnell zu erfassen, da sehr unübersichtlich."</div>
+          <div class="quote">„Alles was Buchhaltung betrifft ist zeitaufwendiger, angefangen beim Verschaffen eines Überblicks in der OP/AP-Auskunft und F9-Maske bis hin zur Durchführung verschiedener Operationen."</div>
+          <div class="quote">„OP/AP Auskunft überhaupt verstehen bei schwierigen Fällen (z.B. Seitenwenden-Abos), alles auf einen Blick sehen, Veränderungen von einer anderen Bearbeiter:in nachvollziehen."</div>
+          <div class="quote">„Klärung von Rechnungsfragen dauert sehr lang."</div>
+          <div class="quote">„Größtes Problem ist ganz klar die Buchhaltung: fehlerhafte Rechnungen kommen sehr oft vor. Stornierungen und Neuberechnung von Abonnements sind sehr schwierig umzusetzen, bzw. nicht möglich."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Storno &amp; Rechnungskorrekturen</div>
+        <div class="quotes">
+          <div class="quote">„Storno von Rechnungen: viele Schritte und kleinteilig – daher fehleranfällig und dauert länger als im Altsystem."</div>
+          <div class="quote">„System ist zu langsam und zu kleinteilig, folglich auch fehleranfälliger (z.B. Stornos = Gutschriftkündigung)."</div>
+          <div class="quote">„Etwas am 'Berechnet-Bis-Datum' ändern (z.B. Kund:innen wollen einen anderen Preis zahlen, rückwirkend eine neue Rechnung erstellen geht nicht bzw. wir wissen nicht, wie es geht)."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Adressänderungen</div>
+        <div class="quotes">
+          <div class="quote">„Adressänderung: System lässt einem zu wenig Spielraum bei der Eingabe und man muss häufig immer wieder gleiche Meldungen wegklicken um speichern zu können."</div>
+          <div class="quote">„Adressänderungen (z.B. man muss Feld für Feld rauslöschen / Träger auf Post ändern / Adressfindung)."</div>
+          <div class="quote">„Die Trennung von Zahler- und Lieferadressen bereitet in der Praxis immer wieder große Probleme."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Allgemeine Unübersichtlichkeit der Oberfläche</div>
+        <div class="quotes">
+          <div class="quote">„Die HUP-Arbeitsoberfläche erscheint insgesamt sehr unübersichtlich und schlecht gestaltet. Vieles ist auf den ersten Blick nicht ersichtlich."</div>
+          <div class="quote">„Wenn man eine Änderung vornimmt, gibt es mit einem Klick keine Übersicht zur Prüfung, ob alles geändert wurde."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Kommunikation mit Trägerdiensten</div>
+        <div class="quotes">
+          <div class="quote">„Kommunikation mit Trägerdiensten (Abo- bzw. Auftragsnummer werden falsch übermittelt, Änderungsmitteilungen stimmen oft nicht)."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Abo-Arten / Preise ändern</div>
+        <div class="quotes">
+          <div class="quote">„Das Abo-Teil komplett neu anlegen zu müssen und die ganze Arbeit mit den Gutschriften und Sofortfaktura macht diese Prozesse unübersichtlich."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 2 von 10</div>
+    <div class="q-title">Gibt es Arbeitsabläufe, die du außerhalb der Software löst?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Wiedervorlagen auf Zettel oder in Word-Dateien</div>
+        <div class="quotes">
+          <div class="quote">„Fälle zur Wiedervorlage schreibe ich auf Zettel oder in Word-Docs, da nicht richtig geschult wurde, wie ich mir Kunden auf Wiedervorlage legen kann."</div>
+          <div class="quote">„Anscheinend gibt es die Möglichkeit in HUP Wiedervorlagen zu erstellen – wird aber nicht genutzt."</div>
+          <div class="quote">„Listen werden erstellt um Workarounds festzuhalten."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Rechnungen manuell drucken &amp; per Post verschicken</div>
+        <div class="quotes">
+          <div class="quote">„Im Moment werden noch alle Rechnungen von uns gedruckt und per Post verschickt."</div>
+          <div class="quote">„Rechnungen werden per Hand gedruckt, gehen per Post raus (wir wissen nicht, welche Briefe Kund:innen bekommen)."</div>
+          <div class="quote">„Mails schreibe ich grundsätzlich nicht aus dem System, HUP ist dafür noch nicht eingerichtet."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Abofix wird weiterhin genutzt</div>
+        <div class="quotes">
+          <div class="quote">„Abofix wird oft noch verwendet, weil Kommentare nicht übernommen wurden."</div>
+          <div class="quote">„HUP ist oft ungeeignet dafür, im Telefonservice komplexere Änderungen durchzuführen. Ich bin daher gezwungen, Zettel zu schreiben."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Mails an Trägerdienste extern / Mahnwesen</div>
+        <div class="quotes">
+          <div class="quote">„Mails an Trägerdienste – es gibt keine Übersicht, an welche Reklamationen verschickt werden."</div>
+          <div class="quote">„Mahnwesen funktioniert noch nicht – Rücklastbriefe war bis vor kurzem nur über manuellen E-Mail-Versand möglich."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+        <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+        <div class="c-body">
+          <div class="c-title">Zahlbestätigungen auf Zettel</div>
+          <div class="quotes">
+            <div class="quote">„Zahlbestätigungen für Steuererklärungen (ist noch nicht im System angelegt)."</div>
+            <div class="quote">„Zahlbestätigungen werden auf Zettel geschrieben."</div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 3 von 10</div>
+    <div class="q-title">Bei welchen Arbeitsabläufen ist die Software so unklar, dass du nachschlagen oder Kolleg:innen fragen musst?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">5</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Buchhaltung allgemein (Rechnungen, Faktura, Storno, Einzüge)</div>
+        <div class="quotes">
+          <div class="quote">„Da der gesamte Bereich Buchhaltung nicht ausreichend oder gar nicht geschult wurde, können wir viele Anfragen nicht ausreichend bearbeiten."</div>
+          <div class="quote">„Es gibt oft kein allgemeingültiges 'Best-Practice', sondern alles wird als Einzelfall behandelt."</div>
+          <div class="quote">„Fast alle Prozesse in der Buchhaltung sind viel zu aufwändig und benötigen zu viele Arbeitsschritte."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Mahnwesen</div>
+        <div class="quotes">
+          <div class="quote">„Mahnwesen (Briefe wurden noch nicht eingerichtet). Mahnläufe wurden noch nicht eingerichtet."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Fehlende / unzureichende Dokumentation</div>
+        <div class="quotes">
+          <div class="quote">„Buchhaltungs-Dokumentation ist nicht qualitativ ausreichend (Screenshots unscharf, Anleitung zu allgemein)."</div>
+          <div class="quote">„Eine umfassende Gebrauchsanleitung der wichtigsten Prozesse liegt bis heute nicht vor."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Abos kündigen &amp; reaktivieren</div>
+        <div class="quotes">
+          <div class="quote">„Abos abbestellen (z.B. weil Kund:in unbekannt ist oder nicht zahlt) und wieder reaktivieren."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 4 von 10</div>
+    <div class="q-title">Welche Fehlermeldungen tauchen am häufigsten auf, und wie gehst du damit um?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">„Lieferadresseintrag fehlt für Tag X" → Fälle bleiben liegen</div>
+        <div class="quotes">
+          <div class="quote">„'Lieferadresseintrag fehlt für Tag X' – Vorgang lässt sich nicht speichern, Fälle liegen auf Halde."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Unerklärliche Fehlermeldungen → „Klicken bis es geht"</div>
+        <div class="quotes">
+          <div class="quote">„Es tauchen öfter Meldungen auf, die wir uns nicht erklären können – Motto oft 'klicken bis es geht'."</div>
+          <div class="quote">„Bei Klick auf den Reiter 'Änderung' taucht oft eine Fehlermeldung auf, die weggeklickt werden muss."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">OP/AP Auskunft &amp; Zustelladressen</div>
+        <div class="quotes">
+          <div class="quote">„OP/AP Auskunft – Listenindex muss weggeklickt werden, was hat es damit auf sich?"</div>
+          <div class="quote">„Zustelladressen werden als unbekannt gemeldet, 'Kein Zustellelement zugeordnet' etc."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Ampelstatus (rot/orange) unklar</div>
+        <div class="quotes">
+          <div class="quote">„Abo auf rote/orangene Ampel setzen – was bedeutet das und was bewirkt das eigentlich?"</div>
+          <div class="quote">„Overflow – die ignoriere ich. Memo-Feld kann nicht korrigiert werden."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 5 von 10</div>
+    <div class="q-title">Gibt es Funktionen, die du dir nicht getraut hast zu nutzen?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Alt-F9-Maske / rückwirkende Zahlungsdaten-Änderungen</div>
+        <div class="quotes">
+          <div class="quote">„Alt-F9-Maske, rückwirkende Änderungen von Zahlungsdaten – wurde noch gar nicht von HUP gezeigt."</div>
+          <div class="quote">„Rückwirkende Änderungen an Zahl-Daten über Alt-F9-Maske (habe es teilweise ausprobiert, aber war nicht immer erfolgreich)."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Mahnwesen &amp; Fakturationen</div>
+        <div class="quotes">
+          <div class="quote">„Z.B. Mahnwesen/Fakturationen – 'trauen' würde ich mich sogar gerne."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Unbekannte Folgen von Aktionen (allgemein)</div>
+        <div class="quotes">
+          <div class="quote">„Es ist teilweise allgemein nicht bekannt, was bestimmte Arbeitsschritte auslösen: 'Rote Ampel' zum Beispiel."</div>
+          <div class="quote">„Kündigungsgrund auf Widerruf setzen – was passiert da im Hintergrund?"</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 6 von 10</div>
+    <div class="q-title">Drei konkrete Fälle aus der letzten Woche, in denen die Software im Stich gelassen hat?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Rechnungskorrektur / -adresse rückwirkend nicht möglich</div>
+        <div class="quotes">
+          <div class="quote">„Unternehmenskunde wünscht korrigierte Rechnung (Adresse des Zahlers): konnte ich nicht abschließen, da mir Wissen zu Alt F9 fehlt."</div>
+          <div class="quote">„Es war nicht möglich, eine Rechnungsadresse rückwirkend zu ändern."</div>
+          <div class="quote">„Berechnungskorrekturen [nicht möglich]."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Rücklastschriften / Buchungsprobleme</div>
+        <div class="quotes">
+          <div class="quote">„Kontoauszüge buchen: Rücklastschrift wird nicht gebucht, weil Rückgabegrund im System nicht vorhanden."</div>
+          <div class="quote">„Rücklasten auf Rechnung setzen – wir konnten nicht speichern aus irgendwelchen Gründen."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+        <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+        <div class="c-body">
+          <div class="c-title">Trägerdienst-Reklamationen &amp; Prämien</div>
+          <div class="quotes">
+            <div class="quote">„Reklamationen können von Trägerdiensten oft nicht zugeordnet werden, da falsche Nummern auf der Reklamation stehen."</div>
+            <div class="quote">„Was passiert mit den Prämien? Gehen sie raus? Dazu fehlen die Informationen im System."</div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 7 von 10</div>
+    <div class="q-title">Wenn du eine Sache mit einem Zauberstab ändern könntest – was wäre das?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">4</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Übersichtlichere Oberfläche, weniger Fenster &amp; Klicks</div>
+        <div class="quotes">
+          <div class="quote">„Übersichtlicher – dass man nicht ständig 'blättern', so viele Fenster öffnen und schließen muss."</div>
+          <div class="quote">„Im alten System konnte man auf einen Blick alles Wichtige sehen. Das vermisse ich am meisten."</div>
+          <div class="quote">„Übersichtlichkeit – dass OP/AP Auskunft und Fakturation getrennt sind."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Abo-Wechsel / Umsteiger vereinfachen &amp; automatisieren</div>
+        <div class="quotes">
+          <div class="quote">„Abo-Umsteiger vereinfachen, so dass ich nur die neue Aboart, Preis und Umstellungsdatum einstellen muss."</div>
+          <div class="quote">„'Widerruf/Sofortiger Stopp des Abos = Sofortiger Stopp der Belieferung und Stornierung der aktuellen Rechnung'."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+        <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+        <div class="c-body">
+          <div class="c-title">„Geliefert"-Button aus Abofix zurück</div>
+          <div class="quotes">
+            <div class="quote">„'Geliefert-Button' aus Abofix fehlt sehr, Zugriff auf das Feld 'Ber.bis', um Fakturation zu beeinflussen."</div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 8 von 10</div>
+    <div class="q-title">Welche Arbeitsabläufe sollen im Live-System Schritt für Schritt durchgegangen werden?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">5</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Buchhaltung &amp; Rechnungskorrekturen</div>
+        <div class="quotes">
+          <div class="quote">„Unsere Buchhaltungsfragen!!"</div>
+          <div class="quote">„Nachträgliche Rechnungskorrekturen: Änderung Zahler, Adresse, Firmierung etc."</div>
+          <div class="quote">„Komplizierte und echte Rechnungskorrekturen – bitte mit Vorbereitung der Trainer."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Alt-F9-Maske / Zahlungsmodi</div>
+        <div class="quotes">
+          <div class="quote">„Funktionen Alt-F9 (Zahlungsmodi konfigurieren)."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+        <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+        <div class="c-body">
+          <div class="c-title">Wiedervorlage / Trägerdienst-Übermittlung</div>
+          <div class="quotes">
+            <div class="quote">„Wiedervorlage, Queue (?)"</div>
+            <div class="quote">„Aufnahme einer abweichenden Zustelladresse und Überprüfung der Übermittlung an den Trägerdienst."</div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 9 von 10</div>
+    <div class="q-title">Bevorzugst du kurze Workshops zu Spezialthemen oder eine große Grundsatz-Schulung?</div>
+    <div class="tally">
+      <div class="tally-item winner">
+        <span class="tally-num">4</span>
+        <span class="tally-label">Kurze Workshops zu Spezialthemen</span>
+      </div>
+      <div class="tally-item">
+        <span class="tally-num">2</span>
+        <span class="tally-label">Beides</span>
+      </div>
+      <div class="tally-item">
+        <span class="tally-num">0</span>
+        <span class="tally-label">Große Grundsatz-Schulung</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-meta">Frage 10 von 10</div>
+    <div class="q-title">Gibt es sonst noch etwas, das du dir von den Schulungen wünschst?</div>
+    
+    <div class="cluster lead">
+      <div class="c-count"><span class="c-n">4</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Unsere Fragen &amp; Lösungsansätze ernst nehmen – nicht hinterfragen</div>
+        <div class="quotes">
+          <div class="quote">„Dass man uns ernst nimmt – in den letzten Schulungen wurde oft unsere Fragen gar nicht erst genommen."</div>
+          <div class="quote">„Es soll nicht hinterfragt werden, warum wir Sachen wissen wollen. Lösungsprozesse sollten nicht grundlegend hinterfragt werden."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">3</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Bessere Vorbereitung &amp; konkrete Prozessdokumentation</div>
+        <div class="quotes">
+          <div class="quote">„Bessere Vorbereitung seitens HUP im Gegensatz zu vergangenen Schulungen."</div>
+          <div class="quote">„Konkrete, direkte Prozessvorgänge als Schulungsdokumente (z.B. eine Liste von Schritten)."</div>
+          <div class="quote">„Ich wünsche mir, dass ich für einzelne Klicks nachfragen kann, was damit im Hintergrund ausgelöst wird."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">2</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Präsenz statt Remote</div>
+        <div class="quotes">
+          <div class="quote">„Schulungen sollen NICHT remote stattfinden."</div>
+          <div class="quote">„Dass sie besser sind als die im Oktober, da waren sie fast nur Remote, was sehr unbefriedigend war."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Breiteres Wissen über angrenzende Bereiche</div>
+        <div class="quotes">
+          <div class="quote">„Breiteres Wissen soll vorhanden sein (wir wollen auch Grundlegendes über Zustellung wissen oder über das Admintool)."</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cluster">
+      <div class="c-count"><span class="c-n">1</span><span class="c-n-sub">von 6</span></div>
+      <div class="c-body">
+        <div class="c-title">Kleinere Gruppen &amp; Feedback umsetzen</div>
+        <div class="quotes">
+          <div class="quote">„Vielleicht kleine Gruppen – bei den letzten Schulungen konnte so gut wie kein Arbeitsablauf abgeschlossen werden."</div>
+          <div class="quote">„Ich wünsche mir, dass die Schulungen auch dafür genutzt werden, Anregungen und Vorschläge von uns umzusetzen."</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
